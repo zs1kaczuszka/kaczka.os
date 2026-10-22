@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero Portal — Retro Światy</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            color: #123b50;
+            background:
+                radial-gradient(ellipse at 18% 12%, rgba(255,255,255,.95) 0, rgba(255,255,255,0) 30%),
+                radial-gradient(ellipse at 82% 22%, rgba(157,255,213,.85) 0, rgba(157,255,213,0) 32%),
+                linear-gradient(135deg, #72d8ed 0%, #3ca9d7 42%, #0877b4 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .23;
+            background-image: radial-gradient(rgba(255,255,255,.9) .8px, transparent .8px);
+            background-size: 5px 5px;
+            mask-image: linear-gradient(to bottom, black, transparent 85%);
+        }
+
+        .top-glow {
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            top: -310px;
+            left: calc(50% - 260px);
+            border-radius: 50%;
+            background: rgba(255,255,255,.65);
+            filter: blur(35px);
+            pointer-events: none;
+        }
+
+        .page {
+            position: relative;
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 28px 0 38px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 11px 17px;
+            border: 1px solid rgba(255,255,255,.85);
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(211,246,255,.38));
+            box-shadow: 0 8px 24px rgba(0,68,111,.16), inset 0 1px 0 white;
+            backdrop-filter: blur(14px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .vista-orb {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 21px;
+            font-weight: 800;
+            text-shadow: 0 1px 3px #15577a;
+            background: linear-gradient(135deg, #a9ff7b, #1cbf74 46%, #0795d0 75%, #6be9ff);
+            border: 2px solid rgba(255,255,255,.9);
+            box-shadow: 0 2px 9px rgba(0,76,113,.35), inset 0 1px 3px rgba(255,255,255,.9);
+        }
+
+        .status {
+            color: #21627d;
+            font-size: 12px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.5);
+            border: 1px solid rgba(255,255,255,.7);
+            white-space: nowrap;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 58px 16px 35px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 7px 13px;
+            border: 1px solid rgba(255,255,255,.85);
+            border-radius: 999px;
+            background: rgba(255,255,255,.35);
+            color: #155a79;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+        }
+
+        h1 {
+            margin: 18px 0 12px;
+            color: #fff;
+            font-size: clamp(36px, 6vw, 66px);
+            line-height: 1.04;
+            letter-spacing: -2px;
+            text-shadow: 0 3px 0 rgba(0,87,132,.18), 0 5px 18px rgba(0,59,100,.3);
+        }
+
+        .hero p {
+            max-width: 610px;
+            margin: 0 auto;
+            color: #eaffff;
+            font-size: 17px;
+            line-height: 1.7;
+            text-shadow: 0 1px 4px rgba(0,65,102,.35);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 8px 2px 17px;
+            color: white;
+            text-shadow: 0 1px 5px rgba(0,64,99,.35);
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .section-heading span {
+            font-size: 12px;
+            opacity: .9;
+        }
+
+        .tiles {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .tile {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 285px;
+            padding: 21px;
+            color: #16465c;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,.94);
+            border-radius: 22px;
+            overflow: hidden;
+            background: linear-gradient(155deg, rgba(255,255,255,.83), rgba(220,250,255,.48) 52%, rgba(173,234,249,.56));
+            box-shadow: 0 12px 28px rgba(0,66,105,.22), inset 0 1px 0 white, inset 0 -1px 0 rgba(29,145,181,.15);
+            backdrop-filter: blur(16px);
+            transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+        }
+
+        .tile::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 10%;
+            width: 80%;
+            height: 45%;
+            border-radius: 0 0 50% 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,.45), transparent);
+            pointer-events: none;
+        }
+
+        .tile:hover,
+        .tile:focus-visible {
+            transform: translateY(-7px);
+            box-shadow: 0 20px 38px rgba(0,55,95,.3), inset 0 1px 0 white;
+            outline: none;
+        }
+
+        .tile:active {
+            transform: translateY(-2px) scale(.99);
+        }
+
+        .tile-icon {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 76px;
+            height: 76px;
+            margin-bottom: 18px;
+            font-size: 39px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255,255,255,.95), rgba(151,232,249,.7));
+            border: 1px solid white;
+            box-shadow: 0 5px 13px rgba(0,94,133,.16), inset 0 1px 0 white;
+        }
+
+        .tile h3 {
+            position: relative;
+            margin: 0 0 9px;
+            font-size: 23px;
+            letter-spacing: -.4px;
+        }
+
+        .tile p {
+            position: relative;
+            margin: 0 0 22px;
+            color: #37697d;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .open-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: auto;
+            padding: 10px 13px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,.95);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            background: linear-gradient(180deg, #60cbe8, #168cbe);
+            text-shadow: 0 1px 2px rgba(0,65,100,.45);
+            box-shadow: 0 3px 8px rgba(0,92,134,.2), inset 0 1px 0 rgba(255,255,255,.55);
+        }
+
+        .tile:nth-child(2) .open-link {
+            background: linear-gradient(180deg, #78dca9, #19a66f);
+        }
+
+        .tile:nth-child(3) .open-link {
+            background: linear-gradient(180deg, #72c8f6, #347fd0);
+        }
+
+        .bottom-note {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            align-items: center;
+            margin-top: 28px;
+            color: rgba(255,255,255,.92);
+            font-size: 12px;
+            text-shadow: 0 1px 4px rgba(0,56,91,.35);
+        }
+
+        .bottom-note .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #9dffb6;
+            box-shadow: 0 0 8px #b6ffce;
+        }
+
+        @media (max-width: 760px) {
+            .tiles {
+                grid-template-columns: 1fr;
+            }
+            .tile {
+                min-height: 245px;
+            }
+            .hero {
+                padding-top: 42px;
+            }
+            .status {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-glow"></div>
+
+    <main class="page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="vista-orb" aria-hidden="true">A</div>
+                <span>Aero Portal</span>
+            </div>
+            <div class="status">● System online · edycja retro</div>
+        </header>
+
+        <section class="hero">
+            <div class="eyebrow">Welcome to the old internet</div>
+            <h1>Witaj w Retro Świecie</h1>
+            <p>Trzy nietypowe zakątki internetu, jeden portal i klimat błyszczących okienek z dawnych lat. Wybierz tabliczkę i ruszaj dalej!</p>
+        </section>
+
+        <section aria-labelledby="worlds-title">
+            <div class="section-heading">
+                <h2 id="worlds-title">Wybierz swój świat</h2>
+                <span>3 portale do odkrycia</span>
+            </div>
+
+            <div class="tiles">
+                <a class="tile" href="retroziemniak.html">
+                    <div class="tile-icon" aria-hidden="true">🥔</div>
+                    <h3>Retro Ziemniak</h3>
+                    <p>Retro klimat, ziemniaczane pomysły i własny kawałek internetowej historii. Zajrzyj do świata kartofla!</p>
+                    <span class="open-link"><span>Otwórz portal</span><span aria-hidden="true">➜</span></span>
+                </a>
+
+                <a class="tile" href="kaczka27.html">
+                    <div class="tile-icon" aria-hidden="true">🦆</div>
+                    <h3>Kaczka 27</h3>
+                    <p>Kaczkowa strefa pełna charakteru. Co kryje się za numerem 27? Odkryjesz to na osobnej stronie.</p>
+                    <span class="open-link"><span>Otwórz portal</span><span aria-hidden="true">➜</span></span>
+                </a>
+
+                <a class="tile" href="chlebowyswiat.html">
+                    <div class="tile-icon" aria-hidden="true">🍞</div>
+                    <h3>Chlebowy Świat</h3>
+                    <p>Kraina chrupiących skór, bochenków i chlebowych rankingów. Wejdź i poznaj ten smakowity zakątek.</p>
+                    <span class="open-link"><span>Otwórz portal</span><span aria-hidden="true">➜</span></span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="bottom-note">
+            <span class="dot"></span>
+            <span>Aero Portal © 2007–2026 · Najlepiej smakuje w klimacie retro</span>
+        </footer>
+    </main>
+</body>
+</html>

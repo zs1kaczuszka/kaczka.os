@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Ziemniak 🥔</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            color: #263d2b;
+            background:
+                radial-gradient(ellipse at 15% 10%, rgba(255,255,210,.85), transparent 28%),
+                radial-gradient(ellipse at 85% 25%, rgba(173,255,155,.75), transparent 30%),
+                linear-gradient(135deg, #b7e66d, #59c7a0, #53b9d8, #8bce73);
+            background-size: 100% 100%, 100% 100%, 350% 350%;
+            animation: gardenGlow 18s ease-in-out infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gardenGlow {
+            0% { background-position: 0 0, 0 0, 0% 50%; }
+            50% { background-position: 100% 0, 0 100%, 100% 50%; }
+            100% { background-position: 0 0, 0 0, 0% 50%; }
+        }
+
+        .page { width: min(1050px, calc(100% - 30px)); margin: auto; padding: 24px 0 38px; }
+
+        .glass {
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 22px;
+            background: rgba(255,255,255,.73);
+            box-shadow: 0 12px 30px rgba(38,78,48,.18), inset 0 1px 0 white;
+            backdrop-filter: blur(14px);
+        }
+
+        header {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 14px; padding: 12px 17px; margin-bottom: 26px;
+        }
+
+        .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; }
+        .orb {
+            width: 38px; height: 38px; flex: 0 0 38px; border-radius: 50%;
+            display: grid; place-items: center; color: white; font-size: 21px;
+            background: linear-gradient(135deg, #e7ff83, #50bd69 50%, #38b9d8);
+            border: 2px solid white; box-shadow: 0 2px 9px rgba(46,105,68,.3);
+        }
+
+        .back, .secret-button {
+            color: white; text-decoration: none; font-size: 13px; font-weight: 800;
+            padding: 9px 13px; border: 1px solid rgba(255,255,255,.95); border-radius: 12px;
+            background: linear-gradient(#68d7bd, #168a82);
+            text-shadow: 0 1px 2px rgba(0,65,55,.4);
+            box-shadow: 0 3px 8px rgba(30,95,78,.2), inset 0 1px 0 rgba(255,255,255,.5);
+        }
+
+        .hero {
+            display: grid; grid-template-columns: 1.1fr .9fr; align-items: center;
+            gap: 25px; padding: clamp(24px, 5vw, 45px); overflow: hidden;
+        }
+
+        .tag {
+            display: inline-block; padding: 7px 12px; border: 1px solid white;
+            border-radius: 999px; background: rgba(255,255,255,.72);
+            color: #397e53; font-size: 11px; font-weight: 800; letter-spacing: 1.3px;
+        }
+
+        h1 {
+            margin: 16px 0 12px; color: #fff; font-size: clamp(38px, 6vw, 66px);
+            line-height: 1.02; letter-spacing: -2px;
+            text-shadow: 0 3px 0 rgba(39,102,58,.18), 0 6px 18px rgba(35,92,51,.32);
+        }
+
+        .hero p { margin: 0; line-height: 1.8; font-size: 16px; color: #31533b; }
+
+        .potato-art {
+            min-height: 220px; display: grid; place-items: center; position: relative;
+            border-radius: 24px; border: 1px solid white;
+            background: linear-gradient(145deg, rgba(255,255,255,.75), rgba(192,241,187,.6));
+            box-shadow: inset 0 1px 0 white;
+            overflow: hidden;
+        }
+
+        .potato-art::before, .potato-art::after {
+            content: ""; position: absolute; border-radius: 50%;
+            background: rgba(255,255,255,.32);
+        }
+        .potato-art::before { width: 180px; height: 180px; top: -70px; right: -35px; }
+        .potato-art::after { width: 120px; height: 120px; bottom: -55px; left: -15px; }
+        .big-potato { position: relative; z-index: 1; font-size: clamp(100px, 17vw, 155px); filter: drop-shadow(0 10px 8px rgba(87,91,42,.2)); animation: potatoBob 3.5s ease-in-out infinite; }
+        @keyframes potatoBob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-9px) rotate(5deg); } }
+
+        .section-title {
+            margin: 28px 0 14px; text-align: center; color: white;
+            font-size: clamp(25px, 4vw, 34px); text-shadow: 0 3px 12px rgba(31,85,49,.35);
+        }
+
+        .story { padding: 24px clamp(18px, 4vw, 32px); line-height: 1.85; }
+        .story p { margin: 0 0 14px; }
+        .story p:last-child { margin-bottom: 0; }
+        .story strong { color: #397e53; }
+
+        .gallery {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px;
+        }
+        .photo-card { overflow: hidden; }
+        .photo-card img { display: block; width: 100%; height: 185px; object-fit: cover; }
+        .photo-caption { padding: 13px 15px 16px; }
+        .photo-caption h3 { margin: 0 0 5px; color: #397e53; font-size: 17px; }
+        .photo-caption p { margin: 0; font-size: 13px; line-height: 1.6; color: #49614c; }
+
+        .ranking { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+        .variety { display: flex; gap: 14px; align-items: flex-start; padding: 17px; }
+        .rank {
+            flex: 0 0 44px; width: 44px; height: 44px; display: grid; place-items: center;
+            border-radius: 14px; color: white; font-weight: 900; font-size: 20px;
+            background: linear-gradient(145deg, #a9d85b, #35b99b, #4eaddb);
+            border: 1px solid white; box-shadow: 0 4px 12px rgba(46,105,68,.17);
+        }
+        .variety h3 { margin: 0 0 6px; color: #397e53; font-size: 17px; }
+        .variety p { margin: 0; color: #49614c; font-size: 13px; line-height: 1.65; }
+        .note { margin-top: 20px; padding: 19px 22px; text-align: center; line-height: 1.7; }
+        .note strong { color: #397e53; }
+
+        footer { text-align: center; margin-top: 24px; color: white; font-size: 12px; text-shadow: 0 1px 4px rgba(35,92,51,.45); }
+        .secret-dot {
+            display: inline-block; width: 13px; height: 13px; margin-left: 5px;
+            border: 1px solid rgba(255,255,255,.8); border-radius: 50%;
+            background: rgba(255,255,255,.2); vertical-align: middle; cursor: pointer;
+            opacity: .35; transition: opacity .2s, transform .2s;
+        }
+        .secret-dot:hover, .secret-dot:focus-visible { opacity: 1; transform: scale(1.25); outline: 2px solid white; outline-offset: 2px; }
+        .secret-link {
+            display: none; width: fit-content; margin: 14px auto 0; padding: 11px 16px;
+            color: white; text-decoration: none; font-weight: 800; font-size: 13px;
+            border: 1px solid white; border-radius: 13px;
+            background: linear-gradient(135deg, #79d95d, #22ae9c, #438fdf);
+            box-shadow: 0 5px 14px rgba(37,89,54,.25), inset 0 1px 0 rgba(255,255,255,.5);
+        }
+        .secret-link.visible { display: block; animation: pop .25s ease-out; }
+        @keyframes pop { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        @media (max-width: 720px) {
+            .hero { grid-template-columns: 1fr; }
+            .potato-art { min-height: 170px; }
+            .gallery { grid-template-columns: 1fr; }
+            .photo-card img { height: 220px; }
+            .ranking { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 500px) {
+            header { align-items: flex-start; }
+            .brand { font-size: 14px; }
+            .back { font-size: 12px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="glass">
+            <div class="brand"><div class="orb" aria-hidden="true">🥔</div><span>Aero Portal · Retro Ziemniak</span></div>
+            <a class="back" href="index.html">← Powrót do portalu</a>
+        </header>
+
+        <section class="hero glass">
+            <div>
+                <span class="tag">KARTOFLANA KRONIKA</span>
+                <h1>Retro Ziemniak</h1>
+                <p>
+                    Poznaj historię warzywa, które zmieniło obiady na całym świecie.
+                    Od andyjskich pól po frytki, kluski i chipsy — ziemniak to prawdziwa
+                    legenda kuchni i niekwestionowany boss piwnicy.
+                </p>
+            </div>
+            <div class="potato-art" aria-label="Ilustracja ziemniaka">
+                <span class="big-potato" aria-hidden="true">🥔</span>
+            </div>
+        </section>
+
+        <h2 class="section-title">📜 Historia ziemniaka</h2>
+        <section class="story glass">
+            <p><strong>Rozdział 1: Początki w Andach.</strong> Ziemniaki uprawiano w Ameryce Południowej, w rejonie Andów, już tysiące lat temu. Dla tamtejszych społeczności były ważnym i niezawodnym źródłem pożywienia.</p>
+            <p><strong>Rozdział 2: Podróż przez ocean.</strong> W XVI wieku ziemniak dotarł do Europy wraz z hiszpańskimi wyprawami. Na początku wzbudzał ciekawość, a z czasem zdobywał coraz większą popularność.</p>
+            <p><strong>Rozdział 3: Podbój kuchni.</strong> Z biegiem lat ziemniaki stały się podstawą wielu potraw. Można z nich zrobić frytki, placki, puree, kluski, chipsy i mnóstwo innych pyszności.</p>
+            <p><strong>Rozdział 4: Era współczesna.</strong> Dziś istnieją tysiące odmian ziemniaka. Różnią się kolorem, kształtem, smakiem i tym, czy najlepiej nadają się do gotowania, pieczenia, czy smażenia.</p>
+        </section>
+
+        <h2 class="section-title">📸 Ziemniaki w obiektywie</h2>
+        <section class="gallery">
+            <article class="photo-card glass">
+                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=85" alt="Ziemniaki przygotowane do gotowania" loading="lazy">
+                <div class="photo-caption"><h3>Klasyczne kartofle</h3><p>Skromne z wyglądu, wielkie możliwości. Fundament porządnego obiadu.</p></div>
+            </article>
+            <article class="photo-card glass">
+                <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=85" alt="Złociste frytki z ziemniaków" loading="lazy">
+                <div class="photo-caption"><h3>Frytki — legenda</h3><p>Chrupiący klasyk, który potrafi zniknąć z talerza w rekordowym tempie.</p></div>
+            </article>
+            <article class="photo-card glass">
+                <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=900&q=85" alt="Pieczone ziemniaki" loading="lazy">
+                <div class="photo-caption"><h3>Pieczona potęga</h3><p>Rumiana skórka i miękki środek — ziemniak w trybie premium.</p></div>
+            </article>
+        </section>
+
+        <h2 class="section-title">🏆 Ranking odmian ziemniaka</h2>
+        <section class="ranking">
+            <article class="variety glass"><div class="rank">1</div><div><h3>🥇 Gala</h3><p>Uniwersalna odmiana o żółtym miąższu. Dobra do gotowania i codziennych obiadów — solidny wybór dla ziemniaczanego eksperta.</p></div></article>
+            <article class="variety glass"><div class="rank">2</div><div><h3>🥈 Irga</h3><p>Popularna w Polsce, z jasnym miąższem i delikatnym smakiem. Świetna do tradycyjnych dań i rodzinnych obiadów.</p></div></article>
+            <article class="variety glass"><div class="rank">3</div><div><h3>🥉 Vineta</h3><p>Ma żółty miąższ i dobrze sprawdza się w kuchni na wiele sposobów. Ziemniaczany zawodnik do zadań specjalnych.</p></div></article>
+            <article class="variety glass"><div class="rank">4</div><div><h3>⭐ Denar</h3><p>Wczesna odmiana, ceniona za delikatny smak. Idealna, gdy sezon na młode ziemniaki zaczyna się rozkręcać.</p></div></article>
+            <article class="variety glass"><div class="rank">5</div><div><h3>🔥 Bryza</h3><p>Odmiana o bardziej mączystym miąższu, przydatna do puree i klusek. Dla fanów miękkiej, puszystej ziemniaczanej chmurki.</p></div></article>
+        </section>
+
+        <section class="note glass">
+            <strong>Ziemniaczana mądrość:</strong><br>
+            Nie oceniaj ziemniaka po skórce — oceniaj po frytkach, które z niego powstaną. 😎
+        </section>
+
+        <footer>
+            Retro Ziemniak © 2026 · Bulwa z historią i przyszłością
+            <button class="secret-dot" id="secretDot" type="button" aria-label="Odkryj tajny link" title="Psst... kliknij mnie"></button>
+            <a class="secret-link" id="secretLink" href="https://zs1kaczuszka.github.io/retropotato/" target="_blank" rel="noopener noreferrer">🥔 Odkryto sekret! Otwórz Retro Potato →</a>
+        </footer>
+    </main>
+
+    <script>
+        const secretDot = document.getElementById("secretDot");
+        const secretLink = document.getElementById("secretLink");
+        secretDot.addEventListener("click", () => {
+            secretLink.classList.toggle("visible");
+            secretDot.setAttribute(
+                "aria-label",
+                secretLink.classList.contains("visible") ? "Ukryj tajny link" : "Odkryj tajny link"
+            );
+        });
+    </script>
+</body>
+</html>

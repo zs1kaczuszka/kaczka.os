@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaczka 27 — Technik Programista</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            color: #153d50;
+            background:
+                radial-gradient(ellipse at 18% 12%, rgba(255,255,255,.95), transparent 30%),
+                radial-gradient(ellipse at 82% 22%, rgba(157,255,213,.8), transparent 32%),
+                linear-gradient(135deg, #72d8ed 0%, #3ca9d7 42%, #0877b4 100%);
+            background-attachment: fixed;
+        }
+        .page { width: min(950px, calc(100% - 30px)); margin: auto; padding: 25px 0 35px; }
+        .glass {
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 22px;
+            background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(215,248,255,.5));
+            box-shadow: 0 12px 30px rgba(0,65,105,.22), inset 0 1px 0 white;
+            backdrop-filter: blur(14px);
+        }
+        header {
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            padding: 12px 17px; margin-bottom: 26px;
+        }
+        .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; }
+        .orb {
+            width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+            color: white; font-size: 20px; font-weight: 800;
+            background: linear-gradient(135deg, #a9ff7b, #1cbf74 46%, #0795d0 75%, #6be9ff);
+            border: 2px solid white; box-shadow: 0 2px 9px #397e9c;
+        }
+        .back {
+            color: #fff; text-decoration: none; font-size: 13px; font-weight: 700;
+            padding: 9px 13px; border: 1px solid rgba(255,255,255,.9); border-radius: 12px;
+            background: linear-gradient(#62cde8, #168cbe); text-shadow: 0 1px 2px #276d89;
+        }
+        .profile {
+            display: grid; grid-template-columns: minmax(230px, .9fr) 1.1fr;
+            gap: 28px; align-items: center; padding: clamp(22px, 5vw, 42px);
+        }
+        .portrait {
+            padding: 12px; border-radius: 20px; background: rgba(255,255,255,.75);
+            border: 1px solid white; box-shadow: inset 0 1px 0 white, 0 7px 18px rgba(0,80,120,.14);
+        }
+        .portrait img { display: block; width: 100%; height: auto; border-radius: 12px; }
+        .tag {
+            display: inline-block; padding: 7px 11px; border-radius: 999px;
+            border: 1px solid white; background: rgba(255,255,255,.55);
+            color: #26708b; font-size: 11px; font-weight: 800; letter-spacing: 1.1px;
+        }
+        h1 {
+            margin: 14px 0 10px; color: #fff; font-size: clamp(34px, 5vw, 53px);
+            line-height: 1.05; letter-spacing: -1.5px;
+            text-shadow: 0 3px 0 rgba(0,87,132,.18), 0 5px 18px rgba(0,59,100,.3);
+        }
+        .intro { color: #eaffff; line-height: 1.75; text-shadow: 0 1px 4px rgba(0,65,102,.35); }
+        .quote {
+            margin-top: 18px; padding: 15px 17px; border-left: 4px solid #69d99a;
+            border-radius: 0 14px 14px 0; background: rgba(255,255,255,.58);
+            color: #24576b; line-height: 1.6; font-style: italic;
+        }
+        .stats {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px;
+        }
+        .stat { padding: 17px 12px; text-align: center; }
+        .stat .emoji { font-size: 27px; }
+        .stat strong { display: block; margin: 7px 0 4px; color: #176282; }
+        .stat small { color: #477587; line-height: 1.4; }
+        .footer { text-align: center; color: white; font-size: 12px; margin-top: 23px; text-shadow: 0 1px 4px #246d8b; }
+        @media (max-width: 680px) {
+            .profile { grid-template-columns: 1fr; }
+            .portrait { max-width: 380px; margin: auto; }
+            .stats { grid-template-columns: 1fr; }
+            header { align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="glass">
+            <div class="brand"><div class="orb">A</div><span>Aero Portal · Kaczka 27</span></div>
+            <a class="back" href="index.html">← Powrót do portalu</a>
+        </header>
+
+        <section class="profile glass">
+            <div class="portrait">
+                <img src="kaka.jpg" alt="Rysunkowa postać z wielkim uśmiechem i różowymi policzkami">
+            </div>
+            <div>
+                <span class="tag">PROFIL LEGENDY INTERNETU</span>
+                <h1>Kaczka 27</h1>
+                <p class="intro">
+                    Technik programista z powołania, chlebowy koneser z przekonania , profesjonalny użytkownik gry hitman woa, pomaga w czymś tam, typowy fan miedzińskiego
+                </p>
+                <div class="quote">
+                    „Zjedz chleb głodny nie jesteś sobą,”
+                </div>
+            </div>
+        </section>
+
+        <section class="stats" aria-label="Najważniejsze pasje">
+            <div class="stat glass">
+                <div class="emoji">💻</div>
+                <strong>Technik programista</strong>
+                <small>Naprawia błędy. Czasem nawet te w kodzie.</small>
+            </div>
+            <div class="stat glass">
+                <div class="emoji">🍞</div>
+                <strong>Ekspert od chleba</strong>
+                <small>Każdy bochenek zasługuje na code review.</small>
+            </div>
+            <div class="stat glass">
+                <div class="emoji">🎮</div>
+                <strong>Gracz zawodowy*</strong>
+                <small>*Zawodowo traci poczucie czasu.</small>
+            </div>
+        </section>
+
+        <footer class="footer">Kaczka 27 © 2026 · 404: dieta nie została znaleziona.</footer>
+    </main>
+</body>
+</html>
